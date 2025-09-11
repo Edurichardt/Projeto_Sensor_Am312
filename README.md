@@ -33,35 +33,36 @@ Como a placa STM32 roda um Linux embarcado, o código deve ser compilado cruzado
 1. Na máquina virtual Linux:
 -  Instale a toolchain:
 
-``tar -xvf arm-buildroot-linux-gnueabihf_sdk-DK2.tar.gz
+```tar -xvf arm-buildroot-linux-gnueabihf_sdk-DK2.tar.gz```
 
 -  Escreva o código e salve como cpp 
-```nano
-```projeto.cpp
+```nano```
+
+```projeto.cpp```
 -  Compile com a toolchain
-```arm-linux-gnueabihf-g++ projeto.cpp -o projeto -pthread
+```arm-linux-gnueabihf-g++ projeto.cpp -o projeto -pthread```
 
 2. Transferir o binário para a placa através de uma pasta compartilhada
 
 3. Acessar a placa via SSH:
 -  No PowerShell do Windows:
-```ssh root@<ip_da_placa>
+```ssh root@<ip_da_placa>```
 - Depois digite a senha e pronto, estará dentro do sistema da placa
 
 4. Executar o programa na placa:
 -  Depois de acessar via SSH:
-```chmod +x adc_udp
-```./projeto
+```chmod +x adc_udp```
+```./projeto```
 
 Canal ADC
 - Para saber qual o canal, basta conectar a saída ADC da placa ao GND dela e digitar os seguintes comandos no terminal da placa:
-```cd /sys/bus/iio/devices/iio:device0/
-```ls
+```cd /sys/bus/iio/devices/iio:device0/```
+```ls```
 -  Vai listar os arquivos e vão aparecer arquivos do tipo in_voltageX_raw, sendo x um número. Agora, basta digitar:
-``cat in_voltageX_raw
+```cat in_voltageX_raw```
 -  O que der zero será a saída correta a ser utilizada (no meu caso foi a saída 13)
 
-```int canal_adc = 13;
+```int canal_adc = 13;```
 Esse número deve corresponder ao canal utilizado no STM32 .
 
 

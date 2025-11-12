@@ -1,0 +1,58 @@
+\doxysection{Ler\+ADC Class Reference}
+\hypertarget{classLerADC}{}\label{classLerADC}\index{LerADC@{LerADC}}
+
+
+Classe responsável por ler valores analógicos do ADC.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLerADC_a0bc014a734dabf7657ae7ee5e1444617}{Ler\+ADC}} (int canal\+\_\+adc)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{classLerADC}{Ler\+ADC}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classLerADC_a1ad93b1731504eaa7e4efe92983a1a16}{ler}} ()
+\begin{DoxyCompactList}\small\item\em Lê o valor atual do ADC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe responsável por ler valores analógicos do ADC. 
+
+Esta classe encapsula a leitura de um canal ADC do subsistema IIO (Industrial I/O) do Linux. O valor é lido diretamente de um arquivo de dispositivo localizado em {\ttfamily /sys/bus/iio/devices/}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLerADC_a0bc014a734dabf7657ae7ee5e1444617}\label{classLerADC_a0bc014a734dabf7657ae7ee5e1444617} 
+\index{LerADC@{LerADC}!LerADC@{LerADC}}
+\index{LerADC@{LerADC}!LerADC@{LerADC}}
+\doxysubsubsection{\texorpdfstring{LerADC()}{LerADC()}}
+{\footnotesize\ttfamily Ler\+ADC\+::\+Ler\+ADC (\begin{DoxyParamCaption}\item[{int}]{canal\+\_\+adc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construtor da classe \doxylink{classLerADC}{Ler\+ADC}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em canal\+\_\+adc} & Número do canal ADC (ex.\+: 13 para {\ttfamily in\+\_\+voltage13\+\_\+raw}).\\
+\hline
+\end{DoxyParams}
+Inicializa o caminho do arquivo correspondente ao canal ADC informado. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLerADC_a1ad93b1731504eaa7e4efe92983a1a16}\label{classLerADC_a1ad93b1731504eaa7e4efe92983a1a16} 
+\index{LerADC@{LerADC}!ler@{ler}}
+\index{ler@{ler}!LerADC@{LerADC}}
+\doxysubsubsection{\texorpdfstring{ler()}{ler()}}
+{\footnotesize\ttfamily int Ler\+ADC\+::ler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Lê o valor atual do ADC. 
+
+\begin{DoxyReturn}{Returns}
+Valor inteiro lido do ADC. Retorna -\/1 em caso de erro.
+\end{DoxyReturn}
+Abre o arquivo correspondente ao canal e lê o valor numérico. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+projeto.\+cpp\end{DoxyCompactItemize}

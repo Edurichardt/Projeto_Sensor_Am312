@@ -1,0 +1,148 @@
+\chapter{Projeto\+: Leitura de ADC e Envio via UDP (STM32 + AM312)}
+\hypertarget{md_README}{}\label{md_README}\index{Projeto: Leitura de ADC e Envio via UDP (STM32 + AM312)@{Projeto: Leitura de ADC e Envio via UDP (STM32 + AM312)}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+ Este projeto tem como objetivo {\bfseries{ler valores analógicos}} de um canal ADC em uma placa {\bfseries{STM32}} e enviar periodicamente esses valores para um PC remoto via {\bfseries{UDP}}. ~\newline
+ O sensor utilizado é o {\bfseries{AM312 (sensor PIR de presença)}}, conectado a um canal ADC da placa.
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md2}{}\doxysection{\texorpdfstring{Funcionalidades}{Funcionalidades}}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Leitura periódica do valor analógico do ADC (via interface {\bfseries{IIO}} do Linux embarcado).
+\item Envio dos valores para um PC remoto no formato {\bfseries{CSV}} ({\ttfamily adc,\texorpdfstring{$<$}{<}valor\texorpdfstring{$>$}{>}}).
+\item Exibição dos valores no terminal.
+\item Detecção de presença com base em um limiar configurável.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Estrutura do Código}{Estrutura do Código}}\label{md_README_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{Classe {\ttfamily \doxylink{classLerADC}{Ler\+ADC}}}} ~\newline
+ Responsável por abrir o arquivo de leitura do canal ADC ({\ttfamily /sys/bus/iio/devices/iio\+:device0/in\+\_\+voltage\+X\+\_\+raw}) e retornar o valor lido.
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+Loop principal ({\ttfamily main})\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} ~\newline
+
+\begin{DoxyItemize}
+\item Cria o socket UDP. ~\newline
+
+\item Configura o endereço IP e a porta do PC destino. ~\newline
+
+\item Lê o ADC a cada 2 segundos. ~\newline
+
+\item Envia os dados para o PC. ~\newline
+
+\item Exibe no terminal se houve {\bfseries{presença detectada}}.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{Compilação Cruzada para o Linux Embarcado (\+STM32)}{Compilação Cruzada para o Linux Embarcado (STM32)}}\label{md_README_autotoc_md5}
+Como a placa STM32 roda um Linux embarcado, o código deve ser compilado cruzado em uma máquina virtual Linux e depois transferido para a placa.
+
+
+\begin{DoxyEnumerate}
+\item Na máquina virtual Linux\+:
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item Instale a toolchain\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/xvf\ arm-\/buildroot-\/linux-\/gnueabihf\_sdk-\/DK2.tar.gz}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Escreva o código e salve como cpp 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{.cpp}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item Compile com a toolchain 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/linux-\/gnueabihf-\/g++\ projeto.cpp\ -\/o\ projeto\ -\/pthread}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item Transferir o binário para a placa através de uma pasta compartilhada
+\item Acessar a placa via SSH\+:
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item No Power\+Shell do Windows\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{root@<ip\_da\_placa>}
+
+\end{DoxyCode}
+
+\item Depois digite a senha e pronto, estará dentro do sistema da placa
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item Executar o programa na placa\+:
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item Depois de acessar via SSH\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{+x\ adc\_udp}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/projeto}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+Canal ADC
+\begin{DoxyItemize}
+\item Para saber qual o canal, basta conectar a saída ADC da placa ao GND dela e digitar os seguintes comandos no terminal da placa\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/sys/bus/iio/devices/iio:device0/}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+\item Vai listar os arquivos e vão aparecer arquivos do tipo in\+\_\+voltage\+X\+\_\+raw, sendo x um número. Agora, basta digitar\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{in\_voltageX\_raw}
+
+\end{DoxyCode}
+
+\item O que der zero será a saída correta a ser utilizada (no meu caso foi a saída 13)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{canal\_adc\ =\ 13;}
+
+\end{DoxyCode}
+ Esse número deve corresponder ao canal utilizado no STM32 .\hypertarget{md_README_autotoc_md6}{}\doxysection{\texorpdfstring{Abrindo Porta no Firewall do Windows}{Abrindo Porta no Firewall do Windows}}\label{md_README_autotoc_md6}
+Para que o PC consiga receber os pacotes UDP enviados pela placa, é necessário liberar a porta utilizada (ex.\+: {\ttfamily 5000}) no {\bfseries{Firewall do Windows}}.\hypertarget{md_README_autotoc_md7}{}\doxysubsection{\texorpdfstring{Passos\+:}{Passos:}}\label{md_README_autotoc_md7}
+
+\begin{DoxyEnumerate}
+\item Abra o menu {\bfseries{Iniciar}} e pesquise por \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}"{}\+Firewall do Windows com Segurança Avançada"{}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}.
+\item No painel à esquerda, clique em {\bfseries{Regras de Entrada}}.
+\item No painel à direita, clique em {\bfseries{Nova Regra...}}.
+\item Selecione {\bfseries{Porta}} e avance.
+\item Escolha {\bfseries{UDP}} e insira a porta desejada (ex.\+: {\ttfamily 5000}).
+\item Clique em {\bfseries{Permitir a conexão}} e avance.
+\item Marque todos os perfis (Domínio, Privado, Público).
+\item Dê um nome à regra (ex.\+: {\ttfamily UDP Porta 5000}) e conclua.
+\end{DoxyEnumerate}
+
+Agora o PC poderá receber mensagens UDP nessa porta. 

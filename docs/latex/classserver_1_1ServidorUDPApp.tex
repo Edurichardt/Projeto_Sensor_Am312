@@ -1,0 +1,144 @@
+\doxysection{server.\+Servidor\+UDPApp Class Reference}
+\hypertarget{classserver_1_1ServidorUDPApp}{}\label{classserver_1_1ServidorUDPApp}\index{server.ServidorUDPApp@{server.ServidorUDPApp}}
+
+
+Classe principal da aplicação Tkinter para o servidor UDP.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classserver_1_1ServidorUDPApp_aabf34b3d4d43ade5cba9a1258052f7b2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, master)
+\begin{DoxyCompactList}\small\item\em Construtor da classe Servidor\+UDPApp. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_ac56a092ea387ca99785ac2b96c746d09}\label{classserver_1_1ServidorUDPApp_ac56a092ea387ca99785ac2b96c746d09} 
+{\bfseries iniciar\+\_\+servidor} (self)
+\begin{DoxyCompactList}\small\item\em Inicia o servidor UDP em uma thread separada. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_aadb4ffd921f0c16a135de2f23e5a1256}\label{classserver_1_1ServidorUDPApp_aadb4ffd921f0c16a135de2f23e5a1256} 
+{\bfseries parar\+\_\+servidor} (self)
+\begin{DoxyCompactList}\small\item\em Interrompe a execução do servidor UDP e fecha o socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a415617ad709263f1cdb2eead418a7cb0}\label{classserver_1_1ServidorUDPApp_a415617ad709263f1cdb2eead418a7cb0} 
+{\bfseries master}
+\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_ad2c008358445402d10010d03897137f3}\label{classserver_1_1ServidorUDPApp_ad2c008358445402d10010d03897137f3} 
+{\bfseries IP\+\_\+\+LOCAL}
+\begin{DoxyCompactList}\small\item\em Endereço IP local em que o servidor UDP irá escutar. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a3242559d09f95c1f356149d3ca166af6}\label{classserver_1_1ServidorUDPApp_a3242559d09f95c1f356149d3ca166af6} 
+{\bfseries PORTA}
+\begin{DoxyCompactList}\small\item\em Porta UDP utilizada para receber os pacotes de dados. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_aeb187a11ddf69bf4d999c12396f50e52}\label{classserver_1_1ServidorUDPApp_aeb187a11ddf69bf4d999c12396f50e52} 
+{\bfseries executando}
+\begin{DoxyCompactList}\small\item\em Indica se o servidor está ativo (True) ou parado (False). \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a98f9213cc4d1ce1f42fc279f01d5f85d}\label{classserver_1_1ServidorUDPApp_a98f9213cc4d1ce1f42fc279f01d5f85d} 
+{\bfseries socket\+\_\+udp}
+\begin{DoxyCompactList}\small\item\em Objeto socket utilizado para comunicação UDP. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a152ea3b5731b8fcab20442d21997ed35}\label{classserver_1_1ServidorUDPApp_a152ea3b5731b8fcab20442d21997ed35} 
+{\bfseries queue}
+\begin{DoxyCompactList}\small\item\em Fila de mensagens usada para troca segura entre threads. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a7f28d38eb666d56738891261f08f4f8a}\label{classserver_1_1ServidorUDPApp_a7f28d38eb666d56738891261f08f4f8a} 
+{\bfseries limiar\+\_\+presenca}
+\begin{DoxyCompactList}\small\item\em Valor mínimo do sensor para ser considerado "{}presença detectada"{}. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_ae3d94f153d414f4579d54956b611d630}\label{classserver_1_1ServidorUDPApp_ae3d94f153d414f4579d54956b611d630} 
+{\bfseries botao\+\_\+iniciar}
+\begin{DoxyCompactList}\small\item\em Botão para iniciar o servidor UDP. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a9ea8de157ab44e851d3c606539320ab2}\label{classserver_1_1ServidorUDPApp_a9ea8de157ab44e851d3c606539320ab2} 
+{\bfseries botao\+\_\+parar}
+\begin{DoxyCompactList}\small\item\em Botão para encerrar o servidor UDP. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a6a838b4002945c35dcba0472024ced66}\label{classserver_1_1ServidorUDPApp_a6a838b4002945c35dcba0472024ced66} 
+{\bfseries canvas}
+\begin{DoxyCompactList}\small\item\em Canvas usado para desenhar o círculo indicador de presença. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_af46c194490d8e6f12e44edb7098a6dce}\label{classserver_1_1ServidorUDPApp_af46c194490d8e6f12e44edb7098a6dce} 
+{\bfseries indicador}
+\begin{DoxyCompactList}\small\item\em Elemento oval (círculo) que muda de cor conforme o valor do sensor. \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a780ac3ee6c929ffc197ebf42174fb2a0}\label{classserver_1_1ServidorUDPApp_a780ac3ee6c929ffc197ebf42174fb2a0} 
+{\bfseries label\+\_\+estado}
+\begin{DoxyCompactList}\small\item\em Rótulo textual que indica o estado atual ("{}\+Sem presença"{} ou "{}\+Presença detectada"{}). \end{DoxyCompactList}\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_afdfd95a0d2b0eeda636fd539aa6d3630}\label{classserver_1_1ServidorUDPApp_afdfd95a0d2b0eeda636fd539aa6d3630} 
+{\bfseries texto\+\_\+logs}
+\begin{DoxyCompactList}\small\item\em Widget de texto que exibe as mensagens recebidas e logs do sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a54cc240029dfc951dc811099665eaa37}\label{classserver_1_1ServidorUDPApp_a54cc240029dfc951dc811099665eaa37} 
+{\bfseries \+\_\+montar\+\_\+interface} (self)
+\begin{DoxyCompactList}\small\item\em Monta os elementos da interface gráfica. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classserver_1_1ServidorUDPApp_a7fe86d7bd699740dca24422afe262dcc}{\+\_\+rodar\+\_\+servidor}} (self)
+\begin{DoxyCompactList}\small\item\em Loop principal de recepção de pacotes UDP. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classserver_1_1ServidorUDPApp_a4361c8ac66869abffb80f6d7c46d82f6}{\+\_\+atualizar\+\_\+interface}} (self)
+\begin{DoxyCompactList}\small\item\em Atualiza periodicamente a interface com os dados recebidos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classserver_1_1ServidorUDPApp_a7b2a40ec40f6b90df1ab6d7b3d4a6b1d}{\+\_\+adicionar\+\_\+log}} (self, texto)
+\begin{DoxyCompactList}\small\item\em Adiciona texto à área de logs da interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classserver_1_1ServidorUDPApp_a9dfc41357aed317b6b1fa4614664451a}\label{classserver_1_1ServidorUDPApp_a9dfc41357aed317b6b1fa4614664451a} 
+{\bfseries \+\_\+atualizar\+\_\+interface}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe principal da aplicação Tkinter para o servidor UDP. 
+
+Esta classe cria a janela gráfica, inicializa o servidor UDP em uma thread separada, e atualiza continuamente a interface conforme os dados recebidos. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classserver_1_1ServidorUDPApp_aabf34b3d4d43ade5cba9a1258052f7b2}\label{classserver_1_1ServidorUDPApp_aabf34b3d4d43ade5cba9a1258052f7b2} 
+\index{server.ServidorUDPApp@{server.ServidorUDPApp}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!server.ServidorUDPApp@{server.ServidorUDPApp}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily server.\+Servidor\+UDPApp.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{master }\end{DoxyParamCaption})}
+
+
+
+Construtor da classe Servidor\+UDPApp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master} & A janela principal do Tkinter. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classserver_1_1ServidorUDPApp_a7b2a40ec40f6b90df1ab6d7b3d4a6b1d}\label{classserver_1_1ServidorUDPApp_a7b2a40ec40f6b90df1ab6d7b3d4a6b1d} 
+\index{server.ServidorUDPApp@{server.ServidorUDPApp}!\_adicionar\_log@{\_adicionar\_log}}
+\index{\_adicionar\_log@{\_adicionar\_log}!server.ServidorUDPApp@{server.ServidorUDPApp}}
+\doxysubsubsection{\texorpdfstring{\_adicionar\_log()}{\_adicionar\_log()}}
+{\footnotesize\ttfamily server.\+Servidor\+UDPApp.\+\_\+adicionar\+\_\+log (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{texto }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Adiciona texto à área de logs da interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texto} & String contendo a mensagem a ser exibida. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classserver_1_1ServidorUDPApp_a4361c8ac66869abffb80f6d7c46d82f6}\label{classserver_1_1ServidorUDPApp_a4361c8ac66869abffb80f6d7c46d82f6} 
+\index{server.ServidorUDPApp@{server.ServidorUDPApp}!\_atualizar\_interface@{\_atualizar\_interface}}
+\index{\_atualizar\_interface@{\_atualizar\_interface}!server.ServidorUDPApp@{server.ServidorUDPApp}}
+\doxysubsubsection{\texorpdfstring{\_atualizar\_interface()}{\_atualizar\_interface()}}
+{\footnotesize\ttfamily server.\+Servidor\+UDPApp.\+\_\+atualizar\+\_\+interface (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Atualiza periodicamente a interface com os dados recebidos. 
+
+Esta função é chamada a cada 200 ms para verificar a fila de mensagens e atualizar o log e o indicador visual conforme os valores recebidos. \Hypertarget{classserver_1_1ServidorUDPApp_a7fe86d7bd699740dca24422afe262dcc}\label{classserver_1_1ServidorUDPApp_a7fe86d7bd699740dca24422afe262dcc} 
+\index{server.ServidorUDPApp@{server.ServidorUDPApp}!\_rodar\_servidor@{\_rodar\_servidor}}
+\index{\_rodar\_servidor@{\_rodar\_servidor}!server.ServidorUDPApp@{server.ServidorUDPApp}}
+\doxysubsubsection{\texorpdfstring{\_rodar\_servidor()}{\_rodar\_servidor()}}
+{\footnotesize\ttfamily server.\+Servidor\+UDPApp.\+\_\+rodar\+\_\+servidor (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Loop principal de recepção de pacotes UDP. 
+
+O servidor escuta continuamente por mensagens UDP e as envia para a fila de mensagens {\ttfamily queue}, onde serão processadas pela interface. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server.\+py\end{DoxyCompactItemize}

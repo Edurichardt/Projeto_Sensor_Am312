@@ -14,7 +14,7 @@ O sensor utilizado é o **AM312 (sensor PIR de presença)**, conectado a um cana
 
 ---
 
-##  Estrutura do Código
+##  Estrutura do Código Main
 
 - **Classe `LerADC`**  
   Responsável por abrir o arquivo de leitura do canal ADC (`/sys/bus/iio/devices/iio:device0/in_voltageX_raw`) e retornar o valor lido.
@@ -25,6 +25,59 @@ O sensor utilizado é o **AM312 (sensor PIR de presença)**, conectado a um cana
   - Lê o ADC a cada 2 segundos.  
   - Envia os dados para o PC.  
   - Exibe no terminal se houve **presença detectada**.
+
+
+  ## Estrutura e Funcionamento do Código Python
+
+O código em Python é responsável pela **leitura da tensão enviada pela placa microcontroladora** e pelo **acionamento de uma luz indicativa (LED virtual)** dependendo do valor medido. Ele se comunica com o hardware via **UDP** e exibe informações de status em tempo real.
+
+###  Lógica Principal
+
+1. O código recebe continuamente os dados de tensão vindos pela rede.
+2. Ele converte o valor recebido para número e verifica se a tensão ultrapassa um limite predefinido.
+3. Caso a tensão atinja um valor muito alto (por exemplo, acima de `50000`), a luz virtual muda para **verde**, indicando que a condição foi atingida.
+4. Caso contrário, a luz permanece em outra cor (por exemplo, vermelha), indicando nível normal.
+
+###  Estrutura do Código
+
+- **Importação de bibliotecas**: inclui os módulos necessários para comunicação via rede e interface gráfica.
+- **Configuração do socket UDP**: define o IP e a porta usados na comunicação com a placa.
+- **Função principal (`main`)**:
+  - Recebe os dados de tensão.
+  - Processa o valor.
+  - Atualiza a cor da luz conforme o nível de tensão.
+- **Interface gráfica (Tkinter)**:
+  - Exibe a luz (LED virtual).
+  - Atualiza sua cor dinamicamente conforme os dados recebidos.
+
+###  Exemplo de Funcionamento
+
+Quando a placa envia um pacote UDP com a tensão:
+
+```python
+tensao = 52340
+```
+
+O código identifica que o valor é alto e muda o LED para **verde**, sinalizando o evento.
+
+###  Organização Recomendada
+
+```
+Projeto_Sensor_AM312/
+│
+├── main.cpp              # Código principal da aplicação em C++
+├── server.py             # Código Python responsável pela interface e leitura via UDP
+├── Doxyfile              # Arquivo de configuração do Doxygen
+├── docs/                 # Documentação gerada automaticamente pelo Doxygen
+└── README.md             # Descrição geral do projeto
+```
+
+###  Integração com o Sistema
+
+O código Python complementa o `main.cpp` fornecendo:
+- Uma **interface gráfica simples** para visualização dos dados.
+- Um **mecanismo de comunicação UDP** que permite o envio e recebimento de informações entre o microcontrolador e o sistema principal.
+
 
 
 ## Compilação Cruzada para o Linux Embarcado (STM32)
@@ -82,6 +135,19 @@ Para que o PC consiga receber os pacotes UDP enviados pela placa, é necessário
 8. Dê um nome à regra (ex.: `UDP Porta 5000`) e conclua.
 
 Agora o PC poderá receber mensagens UDP nessa porta.
+
+## Abrindo a interface:
+Essas mensagens UDP vão chegar para a interface gráfica. Para abrir ela sem ter que abrir o código fonte, você pode gerar um executável empacotado. Para isso, basta instalar o pyinstaller pelo terminal:
+```pip install pyinstaller```
+
+Após isso, basta digitar:
+```pyinstaller --onefile --windowed server.py```
+Onde 
+--onefile: cria um único arquivo .exe (ou binário Linux).
+
+--windowed: impede que o terminal apareça junto com a interface gráfica (Tkinter).
+
+Depois disso, teremos nosso executável server.exe.
 
 
 

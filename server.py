@@ -11,13 +11,14 @@
 #
 #  @author Eduardo
 #  @date 2025
-#  @version 1.0
+#  @version 1.1
 
 import socket
 import threading
 import tkinter as tk
 from tkinter import ttk
 import queue
+from datetime import datetime
 
 
 ## @class ServidorUDPApp
@@ -31,7 +32,7 @@ class ServidorUDPApp:
     def __init__(self, master):
         self.master = master
         master.title("Servidor UDP - Indicador de Presença")
-        master.geometry("600x400")
+        master.geometry("650x450")
         master.configure(bg="#1b1b1b")
 
         ## @var IP_LOCAL
@@ -57,6 +58,10 @@ class ServidorUDPApp:
         ## @var limiar_presenca
         #  Valor mínimo do sensor para ser considerado "presença detectada".
         self.limiar_presenca = 50000
+
+        ## @var log_presencas
+        #  Lista que armazena os eventos de presença detectada com timestamp.
+        self.log_presencas = []
 
         ## @brief Monta todos os elementos da interface gráfica.
         self._montar_interface()
@@ -88,6 +93,11 @@ class ServidorUDPApp:
         #  Botão para encerrar o servidor UDP.
         self.botao_parar = ttk.Button(frame_botoes, text="Parar Servidor", command=self.parar_servidor, state="disabled")
         self.botao_parar.grid(row=0, column=1, padx=10)
+
+        ## @var botao_salvar
+        #  Botão para salvar o log de presenças em arquivo texto.
+        self.botao_salvar = ttk.Button(frame_botoes, text="Salvar Log", command=self._salvar_log)
+        self.botao_salvar.grid(row=0, column=2, padx=10)
 
         # --- Indicador visual de presença ---
         frame_indicador = tk.Frame(self.master, bg="#1b1b1b")
@@ -183,6 +193,11 @@ class ServidorUDPApp:
                         if valor > self.limiar_presenca:
                             self.canvas.itemconfig(self.indicador, fill="#00ff55")
                             self.label_estado.config(text="Presença detectada", fg="#00ff55")
+
+                            # --- Armazena log de presença ---
+                            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            self.log_presencas.append(f"{timestamp} - Valor: {valor}")
+
                         else:
                             self.canvas.itemconfig(self.indicador, fill="#ff3333")
                             self.label_estado.config(text="Sem presença", fg="#ff5555")
@@ -199,6 +214,22 @@ class ServidorUDPApp:
         self.texto_logs.insert(tk.END, texto)
         self.texto_logs.see(tk.END)
 
+    ## @brief Salva o log de presenças detectadas em um arquivo de texto.
+    def _salvar_log(self):
+        if not self.log_presencas:
+            self._adicionar_log("Nenhuma presença detectada ainda.\n")
+            return
+
+        nome_arquivo = f"log_presencas_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        try:
+            with open(nome_arquivo, "w") as f:
+                f.write("Registro de Presenças Detectadas\n")
+                f.write("=" * 40 + "\n\n")
+                for linha in self.log_presencas:
+                    f.write(linha + "\n")
+            self._adicionar_log(f"Log salvo em: {nome_arquivo}\n")
+        except Exception as e:
+            self._adicionar_log(f"Erro ao salvar log: {e}\n")
 
 
 ## @brief Ponto de entrada do programa.
